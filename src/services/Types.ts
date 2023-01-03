@@ -17,3 +17,8 @@ export type TypeResponse = {
 export type TypeResponseSinggle = {
 	data: TypeUser;
 };
+
+export type TypeLoginUser = {
+	email: string;
+	password: string;
+};

@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import ErrorWarning from "../../src/components/atoms/ErrorWarning";
+import Loader from "../../src/components/atoms/Loader";
 import MainTemplates from "../../src/components/templates/MainTemplates";
 import { fetchAPI } from "../../src/services/API";
 import { TypeResponseSinggle } from "../../src/services/Types";
@@ -14,10 +16,10 @@ const DetailUser = () => {
 		() => fetchAPI.getUser(id as string)
 	);
 
-	console.log(data);
-
 	return (
 		<MainTemplates>
+			{error && <ErrorWarning />}
+			{isLoading && <Loader />}
 			{data?.data && (
 				<div className="mt-10 p-4 bg-white rounded-xl shadow-xl flex flex-col justify-between">
 					<div>

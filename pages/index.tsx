@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import ErrorWarning from "../src/components/atoms/ErrorWarning";
 import Loader from "../src/components/atoms/Loader";
@@ -16,7 +17,9 @@ export default function Home() {
 		TypeResponse,
 		Error
 	>(["getUserAll"], () => fetchAPI.getUserAll({ page: page, per_page: 4 }), {
-		onSuccess: (result) => setTotalPages(result.total_pages),
+		onSuccess: (result) => {
+			setTotalPages(result.total_pages);
+		},
 	});
 
 	useEffect(() => {
@@ -40,7 +43,7 @@ export default function Home() {
 			<>
 				{error && <ErrorWarning />}
 				{(isLoading || isInitialLoading) && <Loader />}
-				{data?.total && data?.total > 1 ? (
+				{data?.total && !isLoading && data?.total > 1 ? (
 					<>
 						<div className="grid grid-cols-4 gap-4 mt-10">
 							{data?.data.map((item: TypeUser) => (
