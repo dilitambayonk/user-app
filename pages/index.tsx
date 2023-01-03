@@ -45,7 +45,7 @@ export default function Home() {
 				{(isLoading || isInitialLoading) && <Loader />}
 				{data?.total && !isLoading && data?.total > 1 ? (
 					<>
-						<div className="grid grid-cols-4 gap-4 mt-10">
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
 							{data?.data.map((item: TypeUser) => (
 								<CardUserItem
 									key={item.id}
